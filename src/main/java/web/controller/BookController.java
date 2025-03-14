@@ -51,7 +51,7 @@ public class BookController {
     }
 
     @DeleteMapping("")// 시간 있으면 dto 로 변경할것
-    public boolean remove(@RequestParam int ino , int pwd){
+    public boolean remove(@RequestParam("ino") int ino ,@RequestParam("pwd") String pwd){
         System.out.println("BookController.remove");
         System.out.println("ino = " + ino + ", pwd = " + pwd);
 

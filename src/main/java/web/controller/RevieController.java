@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/review")
+@CrossOrigin("http://localhost:5173")
 public class RevieController {
 
     @Autowired
@@ -38,11 +39,11 @@ public class RevieController {
 
     //삭제
     @DeleteMapping("")
-    public boolean remove(@RequestParam int ino , int pwd){
+    public boolean remove(@RequestParam() int rno , String pwd){
         System.out.println("RevieController.remove");
-        System.out.println("ino = " + ino + ", pwd = " + pwd);
+        System.out.println("rno = " + rno + ", pwd = " + pwd);
 
-        return reviewService.remove(ino, pwd);
+        return reviewService.remove(rno, pwd);
     }
 
 }

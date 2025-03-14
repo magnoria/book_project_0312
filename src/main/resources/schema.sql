@@ -15,12 +15,12 @@ constraint primary key (ino)
 );
 
 create table bookReview(
-
+	
 	rno int auto_increment,
     latter longtext,
     pwd varchar(20) not null,
     ino int,
     constraint primary key(rno),
-    constraint foreign key( ino ) references bookinsert( ino )
+    constraint bookreview foreign key(ino) references bookinsert(ino) on delete cascade
 
 );

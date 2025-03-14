@@ -28,7 +28,7 @@ public class ReviewService {
         return reviewMapper.findAll();
     }
 
-    public boolean remove(int rno , int pwd){
+    public boolean remove(int rno , String pwd){
         System.out.println("reviewService.remove");
         System.out.println("rno = " + rno);
 

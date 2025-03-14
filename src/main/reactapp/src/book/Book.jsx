@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function Book(props){
 
@@ -17,7 +18,7 @@ export default function Book(props){
             const response = await axios.get('http://localhost:8080/book');
             setBooks(response.data);
         } catch (error) {
-            
+            console.log(error);
         }
     }
 
@@ -47,9 +48,6 @@ export default function Book(props){
             
         }
     }
-
-
-
     // 수정부분 끝
 
 
@@ -59,6 +57,29 @@ export default function Book(props){
 
 
     // 삭제 함수
+
+    const[deleteIno , setDeletIno] = useState({ino : '' , pwd : ''});
+    const onValueChange = (e) => {
+        setDeletIno(e.target.value);
+    }
+
+    const onDelete = async (ino , pwd) => {
+        deleteIno.ino = prompt(`현재 번호 : ${ino}` , deleteIno.ino);
+        deleteIno.pwd = prompt('비밀번호' , deleteIno.pwd)
+        if(pwd == deleteIno.pwd){
+        const response = await axios.delete(`http://localhost:8080/book?ino=${ino}&pwd=${pwd}`)
+        if(response.data == true){
+            alert('삭제성공'); onFindAll();
+        }else{alert('삭제실패')}}
+    }
+
+
+
+
+
+
+
+
     return(<>
     
     <div>
@@ -73,10 +94,12 @@ export default function Book(props){
             <h3>비밀번호</h3>
             <input type="text" value={bookData.pwd} name="pwd" onChange={formDataChange}/><br/>
             <button type="button" onClick={onPost}>저장</button>
+            
         </form>
         
         <table border={1}>
-            <thead><tr><td>번호</td><td>제목</td><td>작가</td><td>추천사</td><td>수정</td></tr></thead>
+            <thead><tr><td>번호</td><td>제목</td><td>작가</td><td>추천사</td><td>수정</td><td>삭제</td><td>리뷰</td></tr></thead>
+            
         
             <tbody>
                 {
@@ -88,6 +111,8 @@ export default function Book(props){
                         <td>{book.writer}</td>
                         <td>{book.intro}</td>
                         <td><button type="button" onClick={ () => {navigate('/update')}}>수정</button></td>
+                        <td><button type="button" onClick={ () => {onDelete(book.ino,book.pwd)}}>삭제</button></td>
+                        <td><Link to="/review" replace>리뷰이동</Link></td>
                     </tr>)
                 })
             

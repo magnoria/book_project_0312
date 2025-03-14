@@ -21,8 +21,8 @@ public interface BookMapper {
     @Update("update bookinsert set title = #{title} , writer = #{writer}, intro = #{intro}, pwd = #{pwd} where ino = #{ino} and pwd = #{pwd}")
     boolean update(BookDto bookDto);
 
-    @Delete("delete from bookinsert where ino = #{ino} ")
-    boolean remove(int ino, int pwd);
+    @Delete("delete from bookinsert where ino = #{ino} and pwd = #{pwd}")
+    boolean remove(BookDto bookDto);
 
 
 }

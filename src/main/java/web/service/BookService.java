@@ -42,11 +42,16 @@ public class BookService {
         return bookMapper.update(bookDto);
     }
 
-    public boolean remove(int ino, int pwd){
+    public boolean remove(int ino, String pwd){
         System.out.println("BookService.remove");
         System.out.println("ino = " + ino + ", pwd = " + pwd);
 
-        return bookMapper.remove(ino, pwd);
+        BookDto bookDto = new BookDto();
+        bookDto.setIno(ino);
+        bookDto.setPwd(pwd);
+
+
+        return bookMapper.remove(bookDto);
     }
 
 

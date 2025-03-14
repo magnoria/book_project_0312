@@ -19,8 +19,8 @@ public interface ReviewMapper {
     @Select("select * from bookReview")
     public List<ReviewDto> findAll();
 
-    @Delete("delete from bookReview where rno = #{rno}")
-    public boolean remove(int rno , int pwd);
+    @Delete("delete from bookReview where rno = #{rno} and pwd = #{pwd} ")
+    public boolean remove(int rno , String pwd);
 
 
 }
